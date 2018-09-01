@@ -5,13 +5,11 @@ import ReactIcon from '@ant-design/icons-react';
 import createFromIconfontCN from './IconFont';
 import { svgBaseProps, withThemeSuffix, getThemeFromTypeName, getTypeWithoutTheme } from './utils';
 import warning from '../_util/warning';
-import { getTwoToneColors, setTwoToneColors } from './twoTonePrimaryColor';
+import { getTwoToneColor, setTwoToneColor } from './twoTonePrimaryColor';
 
 // Initial setting
 ReactIcon.add(...Object.keys(allIcons).map((key) => (allIcons as any)[key]));
-ReactIcon.setTwoToneColors({
-  primaryColor: '#1890ff',
-});
+setTwoToneColor('#1890ff');
 
 export interface CustomIconComponentProps {
   width: string | number;
@@ -32,8 +30,7 @@ export interface IconProps {
   title?: string;
   onClick?: React.MouseEventHandler<HTMLElement>;
   component?: React.ComponentType<CustomIconComponentProps>;
-  primaryColor?: string;
-  secondaryColor?: string;
+  twoToneColor?: string;
   viewBox?: string;
   spin?: boolean;
   style?: React.CSSProperties;
@@ -63,8 +60,7 @@ const Icon: React.SFC<IconProps> = (props) => {
 
     // other
     theme, // default to outlined
-    primaryColor,
-    secondaryColor,
+    twoToneColor,
   } = props;
 
   warning(
@@ -134,20 +130,13 @@ const Icon: React.SFC<IconProps> = (props) => {
       getTypeWithoutTheme(type),
       theme || 'outlined',
     );
-    if (secondaryColor) {
-      warning(
-        Boolean(!primaryColor),
-        `two-tone icon should be provided with the property 'primaryColor' at least.`,
-      );
-    }
     return (
       <i className={classString} title={title} style={style} onClick={onClick}>
         <ReactIcon
           className={svgClassString}
           type={computedType}
           style={svgStyle}
-          primaryColor={primaryColor}
-          secondaryColor={secondaryColor}
+          primaryColor={twoToneColor}
         />
       </i>
     );
@@ -160,13 +149,13 @@ const Icon: React.SFC<IconProps> = (props) => {
 
 export type IconType = typeof Icon & {
   createFromIconfontCN: typeof createFromIconfontCN;
-  getTwoToneColors: typeof getTwoToneColors;
-  setTwoToneColors: typeof setTwoToneColors;
+  getTwoToneColor: typeof getTwoToneColor;
+  setTwoToneColor: typeof setTwoToneColor;
 };
 
 Icon.displayName = 'Icon';
 (Icon as IconType).createFromIconfontCN = createFromIconfontCN;
-(Icon as IconType).getTwoToneColors = getTwoToneColors;
-(Icon as IconType).setTwoToneColors = setTwoToneColors;
+(Icon as IconType).getTwoToneColor = getTwoToneColor;
+(Icon as IconType).setTwoToneColor = setTwoToneColor;
 
 export default Icon as IconType;
