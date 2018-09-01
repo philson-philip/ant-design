@@ -1,4 +1,3 @@
-/* eslint-disable */
 import * as React from 'react';
 import { ThemeType } from '../../../../components/icon';
 
@@ -11,13 +10,12 @@ interface IconDisplayState {
 }
 
 export default class IconDisplay extends React.Component<IconDisplayProps, IconDisplayState> {
-  static displayName = 'IconDisplay';
-
   state: IconDisplayState = {
     theme: 'outlined',
   };
 
   render() {
+    // wip
     return null;
   }
 }
