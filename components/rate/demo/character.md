@@ -18,7 +18,7 @@ import { Rate, Icon } from 'antd';
 
 ReactDOM.render(
   <div>
-    <Rate character={<Icon type="heart" />} allowHalf />
+    <Rate character={<Icon type="heart" theme="filled" />} allowHalf />
     <br />
     <Rate character="A" allowHalf style={{ fontSize: 36 }} />
     <br />

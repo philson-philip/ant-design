@@ -66,7 +66,7 @@ function notice(
 
   const target = key++;
   const closePromise = new Promise((resolve) => {
-    const callback =  () => {
+    const callback = () => {
       if (typeof onClose === 'function') {
         onClose();
       }
@@ -79,7 +79,7 @@ function notice(
         style: {},
         content: (
           <div className={`${prefixCls}-custom-content ${prefixCls}-${type}`}>
-            <Icon type={iconType} />
+            <Icon type={iconType} theme={iconType !== 'loading' ? 'filled' : 'outlined'} />
             <span>{content}</span>
           </div>
         ),

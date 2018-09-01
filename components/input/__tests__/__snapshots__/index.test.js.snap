@@ -68,7 +68,7 @@ exports[`Input.Search should support suffix 1`] = `
             <IconReact
               className=""
               style={Object {}}
-              type="search"
+              type="search-o"
             >
               <svg
                 aria-hidden="true"

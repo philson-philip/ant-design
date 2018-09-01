@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import * as allIcons from '@ant-design/icons';
 import ReactIcon from '@ant-design/icons-react';
 import createFromIconfontCN from './IconFont';
-import { svgBaseProps, withThemeSuffix } from './utils';
+import { svgBaseProps, withThemeSuffix, getThemeFromTypeName, getTypeWithoutTheme } from './utils';
 import warning from '../_util/warning';
 import { getTwoToneColors, setTwoToneColors } from './twoTonePrimaryColor';
 
@@ -58,7 +58,7 @@ const Icon: React.SFC<IconProps> = (props) => {
     children,
 
     // other
-    theme,
+    theme, // default to outlined
     primaryColor,
     secondaryColor,
   } = props;
@@ -119,10 +119,17 @@ const Icon: React.SFC<IconProps> = (props) => {
   }
 
   if (typeof type === 'string') {
-    let computedType = type;
-    if (theme) {
-      computedType = withThemeSuffix(type, theme);
+    const alreadyTheme = getThemeFromTypeName(type);
+    if (alreadyTheme && theme) {
+      warning(false,
+        `The icon '${type}' has already theme '${alreadyTheme}',` +
+        ` the property theme '${theme}' will be ignored.`);
     }
+    // default outlined
+    const computedType = withThemeSuffix(
+      getTypeWithoutTheme(type),
+      theme || 'outlined',
+    );
     if (secondaryColor) {
       warning(
         Boolean(!primaryColor),

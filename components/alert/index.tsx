@@ -1,7 +1,7 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import Animate from 'rc-animate';
-import Icon from '../icon';
+import Icon, { ThemeType } from '../icon';
 import classNames from 'classnames';
 import getDataOrAriaProps from '../_util/getDataOrAriaProps';
 
@@ -72,19 +72,24 @@ export default class Alert extends React.Component<AlertProps, any> {
     // banner模式默认为警告
     type = banner && type === undefined ? 'warning' : type || 'info';
 
+    let iconTheme: ThemeType = 'outlined';
     if (!iconType) {
       switch (type) {
         case 'success':
           iconType = 'check-circle';
+          iconTheme = 'filled';
           break;
         case 'info':
           iconType = 'info-circle';
+          iconTheme = 'filled';
           break;
         case 'error':
           iconType = 'close-circle';
+          iconTheme = 'filled';
           break;
         case 'warning':
           iconType = 'exclamation-circle';
+          iconTheme = 'filled';
           break;
         default:
           iconType = 'default';
@@ -92,7 +97,7 @@ export default class Alert extends React.Component<AlertProps, any> {
 
       // use outline icon in alert with description
       if (!!description) {
-        iconType += '-o';
+        iconTheme = 'outlined';
       }
     }
 
@@ -117,6 +122,12 @@ export default class Alert extends React.Component<AlertProps, any> {
 
     const dataOrAriaProps = getDataOrAriaProps(this.props);
 
+    const iconNode = <Icon
+      className={`${prefixCls}-icon`}
+      type={iconType}
+      theme={iconTheme}
+    />;
+
     return this.state.closed ? null : (
       <Animate
         component=""
@@ -125,7 +136,7 @@ export default class Alert extends React.Component<AlertProps, any> {
         onEnd={this.animationEnd}
       >
         <div data-show={this.state.closing} className={alertCls} style={style} {...dataOrAriaProps}>
-          {showIcon ? <Icon className={`${prefixCls}-icon`} type={iconType} /> : null}
+          {showIcon ? iconNode : null}
           <span className={`${prefixCls}-message`}>{message}</span>
           <span className={`${prefixCls}-description`}>{description}</span>
           {closeIcon}
