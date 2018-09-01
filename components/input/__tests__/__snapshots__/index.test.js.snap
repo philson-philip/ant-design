@@ -67,7 +67,6 @@ exports[`Input.Search should support suffix 1`] = `
           >
             <IconReact
               className=""
-              style={Object {}}
               type="search-o"
             >
               <svg
@@ -77,7 +76,6 @@ exports[`Input.Search should support suffix 1`] = `
                 fill="currentColor"
                 height="1em"
                 key="svg-search"
-                style={Object {}}
                 viewBox="0 0 1024 1024"
                 width="1em"
                 xmlns="http://www.w3.org/2000/svg"

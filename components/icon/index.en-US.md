@@ -25,7 +25,6 @@ ReactDOM.render(<IconDisplay />, mountNode);
 | type | Type of the ant design icon | string | - |
 | style | Style properties of icon, like `fontSize` and `color` | CSSProperties | - |
 | theme | Theme of the ant design icon  | 'filled' \| 'outlined' \| 'twoTone' | 'outlined' |
-| svgStyle | Inline style to apply to the SVG element | CSSProperties | - |
 | spin | Rotate icon with animation | boolean | false |
 | component | The component used for the root node. This will override the **`type`** property. | ComponentType<CustomIconComponentProps\> | - |
 | twoToneColor | Only support the two-tone icon. Specific the primary color. | string (hex color) | - |
